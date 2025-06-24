@@ -1,5 +1,3 @@
-# tmux-dotfiles
-
 This repository (`git@github.com:smnuman/tmux-dotfiles.git`) contains dotfiles and scripts for a development environment integrating **tmux**, **iTerm2**, and **Neovim** on macOS Sequoia (M1). The setup includes a customized tmux configuration, TPM (Tmux Plugin Manager) tweaks, and a Git-based workflow for version control.
 
 ## Current Status
