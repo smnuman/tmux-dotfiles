@@ -98,6 +98,9 @@ source ~/.config/yazi_fnc
 #   export EDITOR='nvim'
 # fi
 
+# Load available API keys
+[[ -f ~/.config/.api.keys ]] && source ~/.config/.api.keys
+
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname -m)"
 
