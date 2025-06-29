@@ -11,6 +11,7 @@ ln -sf $REPO_DIR/nvim/init.lua ~/.config/nvim/init.lua
 ln -sf $REPO_DIR/.zshrc ~/.zshrc
 ln -sf $REPO_DIR/iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
 ln -sf $REPO_DIR/.api.keys ~/.config/.api.keys
+ln -sf $REPO_DIR/.homebrewrc ~/.homebrewrc
 
 # Copy tmux plugin file to avoid modifying plugin directory
 mkdir -p $REPO_DIR/tpm/scripts/helpers

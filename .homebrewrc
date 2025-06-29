@@ -1,0 +1,14 @@
+# Homebrew Configuration File from: https://docs.brew.sh/Manpage#environment
+# and from https://github.com/orgs/Homebrew/discussions/2947
+
+HOMEBREW_PREFIX=/opt/homebrew
+HOMEBREW_AUTO_UPDATE_SECS=86400  # Update every 24 hours
+HOMEBREW_EDITOR="/Applications/Visual Studio Code.app"
+HOMEBREW_CLEANUP_MAX_AGE_DAYS=30
+
+export CLICOLOR=1
+
+export HOMEBREW_VERBOSE=1
+export PATH="${HOMEBREW_PREFIX}/sbin:$PATH"
+
+HOMEBREW_NO_AUTO_UPDATE=1
