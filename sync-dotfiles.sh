@@ -1,13 +1,26 @@
 #!/bin/bash
-# Sync dotfiles to repo
-cp ~/.tmux.conf ~/tmux-dotfiles/.tmux.conf
-cp ~/.tmux/plugins/tpm/scripts/helpers/tmux_echo_functions.sh ~/tmux-dotfiles/tpm/scripts/helpers/
-cp ~/.config/nvim/init.lua ~/tmux-dotfiles/nvim/init.lua
-cp ~/.zshrc ~/tmux-dotfiles/.zshrc
-cp ~/Library/Preferences/com.googlecode.iterm2.plist ~/tmux-dotfiles/iterm2.plist
+# Sync dotfiles by creating symlinks to repo and copying tmux plugin
+# Define repo directory
+REPO_DIR=~/tmux-dotfiles
+
+# Create symlinks from home directory to repo
+ln -sf $REPO_DIR/.tmux.conf ~/.tmux.conf
+ln -sf $REPO_DIR/nvim/init.lua ~/.config/nvim/init.lua
+ln -sf $REPO_DIR/.zshrc ~/.zshrc
+ln -sf $REPO_DIR/iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
+ln -sf $REPO_DIR/.api.keys ~/.config./.api.keys
+
+# Copy tmux plugin file to avoid modifying plugin directory
+mkdir -p $REPO_DIR/tpm/scripts/helpers
+cp ~/.tmux/plugins/tpm/scripts/helpers/tmux_echo_functions.sh $REPO_DIR/tpm/scripts/helpers/tmux_echo_functions.sh
+
 # Change directory to the dotfiles repo
-cd ~/tmux-dotfiles
+cd $REPO_DIR
+
+# Update .gitattributes for git-crypt
+echo "*.keys filter=git-crypt diff=git-crypt" > .gitattributes
+
 # Add and commit changes
-git add .tmux.conf tpm/scripts/helpers/tmux_echo_functions.sh nvim/init.lua .zshrc iterm2.plist
-git commit -m "Sync dotfiles $(date)"
+git add .tmux.conf tpm/scripts/helpers/tmux_echo_functions.sh nvim/init.lua .zshrc iterm2.plist .api.keys .gitattributes
+git commit -m "Sync dotfiles $(date)" || echo "No changes to commit"
 git push origin main
