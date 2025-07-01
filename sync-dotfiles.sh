@@ -5,17 +5,26 @@ set -x # Enable command tracing for verbosity
 # Define repo directory
 REPO_DIR=~/tmux-dotfiles
 
+Create symlinks from home directory to repo
+# ln -sf $REPO_DIR/.tmux.conf ~/.tmux.conf
+# ln -sf $REPO_DIR/nvim/init.lua ~/.config/nvim/init.lua
+# ln -sf $REPO_DIR/.zshrc ~/.zshrc
+# ln -sf $REPO_DIR/iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
+# ln -sf $REPO_DIR/.api.keys ~/.config/.api.keys
+# ln -sf $REPO_DIR/.homebrewrc ~/.homebrewrc
+
 # Create symlinks from home directory to repo
-ln -sf $REPO_DIR/.tmux.conf ~/.tmux.conf
-ln -sf $REPO_DIR/nvim/init.lua ~/.config/nvim/init.lua
-ln -sf $REPO_DIR/.zshrc ~/.zshrc
-ln -sf $REPO_DIR/iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
-ln -sf $REPO_DIR/.api.keys ~/.config/.api.keys
-ln -sf $REPO_DIR/.homebrewrc ~/.homebrewrc
+echo "Creating symlinks..."
+ln -sf $REPO_DIR/.tmux.conf ~/.tmux.conf || { echo "Error: Failed to symlink .tmux.conf"; exit 1; }
+ln -sf $REPO_DIR/nvim/init.lua ~/.config/nvim/init.lua || { echo "Error: Failed to symlink init.lua"; exit 1; }
+ln -sf $REPO_DIR/.zshrc ~/.zshrc || { echo "Error: Failed to symlink .zshrc"; exit 1; }
+ln -sf $REPO_DIR/iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist || { echo "Error: Failed to symlink iterm2.plist"; exit 1; }
+ln -sf $REPO_DIR/.api.keys ~/.config/.api.keys || { echo "Error: Failed to symlink .api.keys"; exit 1; }
+ln -sf $REPO_DIR/.homebrewrc ~/.homebrewrc || { echo "Error: Failed to symlink .homebrewrc"; exit 1; } 
 
 # Copy tmux plugin file to avoid modifying plugin directory
 mkdir -p $REPO_DIR/tpm/scripts/helpers
-cp ~/.tmux/plugins/tpm/scripts/helpers/tmux_echo_functions.sh $REPO_DIR/tpm/scripts/helpers/tmux_echo_functions.sh
+cp $REPO_DIR/tpm/scripts/helpers/tmux_echo_functions.sh ~/.tmux/plugins/tpm/scripts/helpers/tmux_echo_functions.sh
 
 # # Change directory to the dotfiles repo
 # cd $REPO_DIR
