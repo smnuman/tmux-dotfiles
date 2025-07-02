@@ -20,7 +20,13 @@ ln -sf $REPO_DIR/nvim/init.lua ~/.config/nvim/init.lua || { echo "Error: Failed 
 ln -sf $REPO_DIR/.zshrc ~/.zshrc || { echo "Error: Failed to symlink .zshrc"; exit 1; }
 ln -sf $REPO_DIR/iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist || { echo "Error: Failed to symlink iterm2.plist"; exit 1; }
 ln -sf $REPO_DIR/.api.keys ~/.config/.api.keys || { echo "Error: Failed to symlink .api.keys"; exit 1; }
-ln -sf $REPO_DIR/.homebrewrc ~/.homebrewrc || { echo "Error: Failed to symlink .homebrewrc"; exit 1; } 
+ln -sf $REPO_DIR/.homebrewrc ~/.homebrewrc || { echo "Error: Failed to symlink .homebrewrc"; exit 1; }
+
+# Symlink .zsh_aliases, .zsh_aliases_doc, .zsh_aliases.md from .zsh_aliases folder to user's home directory
+echo "Symlinking .zsh_aliases files to user home directory..."
+ln -sf $REPO_DIR/.zsh_aliases/.zsh_aliases ~/.zsh_aliases || { echo "Error: Failed to symlink .zsh_aliases"; exit 1; }
+ln -sf $REPO_DIR/.zsh_aliases/.zsh_aliases_doc ~/.zsh_aliases_doc || { echo "Error: Failed to symlink .zsh_aliases_doc"; exit 1; }
+ln -sf $REPO_DIR/.zsh_aliases/.zsh_aliases.md ~/.zsh_aliases.md || { echo "Error: Failed to symlink .zsh_aliases.md"; exit 1; }
 
 # Copy tmux plugin file to avoid modifying plugin directory
 mkdir -p $REPO_DIR/tpm/scripts/helpers

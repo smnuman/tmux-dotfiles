@@ -1,0 +1,245 @@
+#!/bin/zsh
+# zsh aliases converted from .aliases
+
+#-------------------
+# Personal Aliases
+#-------------------
+
+# Modify basic commands interactive, and verbose
+alias cp="cp -iv"                    # Modified CP to be interactive, verbose
+alias rm="rm -i --one-file-system"   # Modified RM to be interactive
+alias mv="mv -iv"                    # Modified MV to be interactive, verbose
+alias grep="grep -i --color"         # Modified GREP to ignore case
+alias ln='ln -sfn'                   # Modified ln to create or modify the link
+
+# -> Prevents accidentally clobbering files.
+alias mk='mkdir -vpm0755'
+alias rd='rm -IRv'                   # Recursive removal with directories with verbose
+
+# Create and change into a new directory
+unalias md
+function md() { mk "$1" && cd "$1" }
+
+# Shows prompt info
+function wtf() { SHOW_PROMPT_HELP }
+
+# Move a file to .dotfiles folder and symbolically Link to it from ~
+function ml.dir() { mv ~/"$1" ~/.dotfiles/"$1" && ln -sfn ~/.dotfiles/"$1" ~/"$1" }
+
+# History search function
+# function h() { grep "$@" -n -h ~/.zsh_history }
+alias h='_(){ grep "$@" -n -h ~/.zsh_history; }; _'
+alias j='jobs -l'
+alias which='type -a'
+
+# To navigate to the different directories
+alias ..='cd ..'
+alias ...='cd ../..'
+
+# Pretty-print of some PATH variables:
+alias path='echo -e ${PATH//:/\\n}'
+alias libpath='echo -e ${LD_LIBRARY_PATH//:/\\n}'
+alias lscolors='echo -e ${LS_COLORS//:/\\n}'
+
+# Filesystem diskspace usage
+alias du='du -kh'    # Makes a more readable output.
+alias df='df -kTh'
+alias dus='df -h'
+
+#-------------------------------------------------------------
+# The 'ls' family (this assumes you use a recent GNU ls).
+#-------------------------------------------------------------
+# Add colors for filetype and human-readable sizes by default on 'ls':
+alias ls='ls -hG'  # macOS doesn't need --color flag
+
+# Tree mod
+# alias tree='tree -I .git -C -h --dirsfirst --noreport --gitignore --prune'  # Tree with colors, human-readable sizes, directories first, ignoring git files
+alias tree='tree -C -p --gitignore -I .git'
+# handle file-list in a sorted way (BSD ls compatible)
+alias lt='ls -ltrG'        # Sort by date (most recent last)
+alias lk='ls -lSrG'        # Sort by size (largest last)
+alias lu='ls -lurG'        # Sort by access time
+alias lc='ls -lcG'         # Sort by change time
+alias lf='ls -1G'          # Files only, one per line
+
+# List linked files function
+function lsl() { la "$@" | grep '^l' || echo "No linked files found!" }
+
+# Directory and file listing functions
+function chd() { [[ -n "$1" && -d "$1" ]] && cd "$1" || echo "Failed!" }
+# macOS compatible directory and file listing functions
+alias l.='ls -d .*'                          # Show hidden files only - short form
+alias ll.='ls -ldG .*'                       # Show hidden files only - long form
+function lsh() {                             # List hidden files in directory
+    local originaldir=$PWD
+    chd "$1"
+    ll.
+    cd "$originaldir"
+    unset originaldir
+}
+function lhd() { ls -ldG */ .*/ 2>/dev/null }   # List directories only
+function lhf() { ls -lG .* | grep -v '^d' }     # List hidden files only
+function lsf() { ls -lG | grep -v '^d' }        # List files only
+function lsd() { ls -ldG */ }                   # List directories only
+function lsb() { ls -lG *~ .*~ 2>/dev/null }    # List backup files only
+
+# Modified commands
+alias sudo='sudo '
+# Homebrew update/upgrade for macOS
+alias uu='brew update && brew upgrade'
+alias ud='brew update && brew upgrade && brew cleanup'
+
+# Alias chmod commands
+alias mx='chmod a+x'
+alias 000='chmod 000'
+alias 600='chmod 600'
+alias 644='chmod 644'
+alias 700='chmod 700'
+alias 744='chmod 744'
+alias 755='chmod 755'
+
+# System commands
+alias lo='osascript -e "tell application \"System Events\" to log out"'
+alias sd='sudo shutdown -h +3'
+alias sr='sudo shutdown -r +1'
+alias srn='sudo shutdown -r now'
+alias sc='sudo killall shutdown'
+alias sx="exit && sudo -k"
+alias x="exit"
+
+# Git shortcuts functions
+function gini() { echo "RUNNING CMD: git init" && git init }
+function g.() { echo 'RUNNING CMD: "git add -A"' && git add -A }
+function gadd() { echo "RUNNING CMD: git add \"$@\"" && git add "$@" }
+function gcomm() { echo "RUNNING CMD: git commit -m \"$1\"" && git commit -m "$1" }
+function gradd() { echo "RUNNING CMD: git remote add origin http://github.com/$USER/$1.git" && git remote add origin "http://github.com/$USER/$1.git" }
+function gpush() { echo "git push -u origin master" && git push -u origin master }
+alias glob='git config --global -l'
+alias gloc='git config --local -l'
+
+# The ubiquitous 'll': with enhanced listing and colors
+alias ll='ls -lhG'         # Long listing with human-readable sizes and colors
+function lm() { ll "$@" | less -R }  # Paginated output with color support
+alias lr='ll -R'           # Recursive ls
+alias la='ll -A'           # Show hidden files
+# Tree-like view (fallback if tree is not installed)
+function tree() {
+    if command -v tree >/dev/null 2>&1; then
+        command tree -Ca "$@"
+    else
+        ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//  |/g' -e 's/^/  /' -e 's/-/|/'
+    fi
+}
+
+# Spelling typos
+alias xs='cd'
+alias vf='cd'
+alias moer='more'
+alias moew='more'
+alias kk='ll'
+
+# Miscellaneous working aliases
+alias cls='clear'
+alias Vim="vim \$(ls -t | head -1)"  # Open last modified file in vim
+alias psg="ps aux | grep zsh"        # Grep for a zsh process (since we're using zsh)
+alias hcl='fc -p'                    # Clear history in zsh
+
+# Utilities
+alias vi='vim'
+alias nicedate='date "+%Y-%m-%d"'
+alias nicedatetime='date "+%Y-%m-%d %H:%M"'
+alias marked='open -a Marked'
+
+# Find functions
+function ffind() {
+    find . -type f -name "*${*}*"  # More compatible search
+}
+alias findbig="find . -type f -ls | sort -k7nr | head -5"  # More efficient for macOS
+
+# Source reload
+alias .z='source ~/.zshrc'
+
+# To Do files
+alias td='cat TODO'                  # what to do
+alias tdn='head -1 TODO'             # what to do next
+alias tdc='sed "/^$/d" TODO | wc -l' # to do count
+alias tdd='sed "1d" TODO > TODO'     # mark next to do done
+alias tdg='cat TODO | grep'          # what to do grep
+
+# Pretty printing function
+function pp() {
+    pygmentize -O 'bg=dark,style=vim' -f terminal256 "$1"
+}
+
+# Ctags function
+function cctags() {
+    bundle show --paths | xargs ctags -R --languages=-javascript
+    ctags -a --extra=+f --exclude=.git --exclude=log --exclude=tmp --languages=-javascript,sql -R *
+}
+
+# Git aliases
+alias ga='git commit --amend'
+alias gap='git add -p'
+alias gb='git branch'
+alias gbc='git rev-parse --abbrev-ref HEAD'
+alias gc='git commit --verbose'
+alias gca='git commit --all --verbose'
+alias gd='git diff'
+alias gdd='git difftool'
+alias gds='git diff -w --staged'
+alias gdw='git diff --word-diff'
+alias gdws='git diff --staged --word-diff'
+alias gfo='git fetch origin'
+alias gl='git log --pretty=format:"%C(yellow)%h%C(reset)|%C(bold blue)%an%C(reset)|%s" | column -s "|" -t | less -FXRS'
+alias glr='git log --pretty="format:* %s" --merges --grep "pull request" | sed -e "s/Merge pull request #[0-9]\{1,\} from kabisaict\///" -e "s/_/ /g"'
+alias glog='git log --pretty=format:"%C(yellow)%h%C(reset) %C(green)%ar%C(reset) %C(bold blue)%an%C(reset) %C(red)%d%C(reset) %s" --graph --abbrev-commit --decorate'
+alias gm='git merge --no-ff --no-commit'
+alias gmc='git ls-files --unmerged | cut -f2 | uniq'
+alias gmf='git commit -F .git/MERGE_MSG'
+alias gmnff='git merge --no-ff'
+alias gp='git push'
+alias gpom='git push origin master'
+alias gpp='git push -u origin $(git rev-parse --abbrev-ref HEAD)'
+alias gra='git rebase --abort'
+alias grc='git rebase --continue'
+alias grd='git rm $(git ls-files -d)'
+alias grs='git rebase --skip'
+alias gs='git status -b -s --ignore-submodules=dirty'
+alias gsd='git svn dcommit'
+alias gsf='git svn fetch'
+alias gsr='git svn rebase'
+alias gtimelog='git --no-pager log --pretty=format:"%C(red)%h%C(reset){%C(green)%cd%C(reset){%C(bold blue)%an%C(reset){%s" --date=iso | column -t -s"{" | less -FXRS'
+alias gw='git whatchanged --oneline'
+alias gz='git archive -o snapshot.zip HEAD'
+
+# Git commit function
+function gg() {
+    git commit -v -a -m "$*"
+}
+
+# Bundler
+alias be='bundle exec'
+alias binstubs='export PATH=./bin:$PATH'
+
+# Rake
+alias migrate='rake db:migrate db:test:prepare'
+alias remigrate='rake db:drop db:create db:migrate db:test:prepare'
+
+# Heroku
+alias hr='heroku'
+alias hrl='hr logs -t'
+alias hrr='hr run'
+alias hrake='hr run rake'
+
+# Rsync
+alias sync='rsync -glpPrtvz --delete --exclude .svn --exclude .DS_Store --exclude .sass-cache'
+
+# Python and other tools
+alias python="python3"
+alias pip="pip3"
+alias code="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
+alias path='echo -e ${PATH//:/\\n}'
+
+# tmux extras
+alias t="tmux"
+alias ta="tmux attach-session"

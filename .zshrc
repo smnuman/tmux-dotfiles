@@ -1,3 +1,7 @@
+#! /bin/zsh
+# setting shell verbose 
+set -x 
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -17,7 +21,7 @@ export HOMEBREW_AUTO_UPDATE_SECS=86400  # 1 day
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
-# ZSH_THEME="dracula+"
+# ZSH_THEME="dracula"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -117,13 +121,18 @@ source ~/.config/yazi_fnc
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Load zsh aliases if they exist
-[[ -f ~/.zsh_aliases ]] && source ~/.zsh_aliases
+[[ -f ~/.zsh_aliases ]] && source ~/.zsh_aliases || echo "Failed to source ~/.zsh_aliases"
+
+[[ -d ~/.zsh_aliases ]] && for file in ~/.zsh_aliases/*; do [[ -f "$file" ]] && source "$file" || echo "Failed to source $file"; done
+
 alias t="tmux"
 alias ta="tmux attach-session"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 export XDG_CONFIG_HOME="$HOME/.config"
+
 # ---- FZF -----
 
 # Set up fzf key bindings and fuzzy completion
@@ -185,7 +194,9 @@ export BAT_THEME=tokyonight_night
 
 # ---- Eza (better ls) -----
 
-alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
+alias e="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
+alias ez="eza --color=always --long --git --icons=always --no-time --no-user"
+alias ea="eza --all --color=always --long --git --icons=always --no-time --no-user"
 
 # thefuck alias
 eval $(thefuck --alias)

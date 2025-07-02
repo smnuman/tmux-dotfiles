@@ -42,7 +42,6 @@ require("nvim-treesitter.configs").setup({
 -- Definitions
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-
 -- Keybindings
 vim.keymap.set("n", "<leader>ff", ":Telescope find_files<CR>", {})
 vim.keymap.set("n", "<leader>fg", ":Telescope live_grep<CR>", {})

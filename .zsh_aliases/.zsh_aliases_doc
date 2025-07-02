@@ -1,0 +1,12 @@
+# Documentation for zsh aliases
+
+This file documents the purpose and usage of each alias and function in `.zsh_aliases`.
+
+- `cp`, `mv`, `rm`: Safer, interactive versions of core commands.
+- `mk`, `rd`: Directory creation and removal helpers.
+- `md`: Make and cd into a directory.
+- `wtf`: Show prompt help.
+- `ml.dir`: Move and link dotfiles.
+- `h`, `j`: History and jobs helpers.
+
+Add more documentation as needed for new aliases and functions.

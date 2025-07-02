@@ -4,127 +4,212 @@ tap "homebrew/command-not-found"
 tap "nikitabobko/tap"
 # Cryptography and SSL/TLS Toolkit
 brew "openssl@3"
+
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.13"
+
 # Automate deployment, configuration, and upgrading
 brew "ansible"
+
 # Download with resuming and segmented downloading
 brew "aria2"
+
+# ChatGPT in the terminal
+brew "ata"
+
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+
 # Extract files from Microsoft cabinet files
 brew "cabextract"
+
 # CD/DVD/Blu-ray premastering and recording software
 brew "cdrtools"
+
 # Platform built on V8 to build network applications
 brew "node"
+
 # CLI tool for Cloudflare Workers
 brew "cloudflare-wrangler"
+
 # Modern, maintained replacement for ls
 brew "eza"
+
 # Simple, fast and user-friendly alternative to find
 brew "fd"
+
 # Play, record, convert, and stream audio and video
 brew "ffmpeg"
+
 # Command-line fuzzy finder written in Go
 brew "fzf"
+
 # Distributed revision control system
 brew "git"
+
 # Enable transparent encryption/decryption of files in a git repo
 brew "git-crypt"
+
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
+
 # Tcl/Tk UI for the git revision control system
 brew "git-gui"
+
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
+
+# Improved top (interactive process viewer)
+brew "htop"
+
 # Tools and libraries to manipulate images in many formats
 brew "imagemagick"
+
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+
 # Package manager for the Lua programming language
 brew "luarocks"
+
+# Quickly generate a temporary email address
+brew "mailsy"
+
 # Utility for directing compilation
 brew "make"
+
 # Mac App Store command-line interface
 brew "mas"
+
+# Feature-rich command-line audio/video downloader
+brew "yt-dlp"
+
+# Media player based on MPlayer and mplayer2
+brew "mpv"
+
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
+
 # Execute binaries from Python packages in isolated environments
 brew "pipx"
+
 # PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
+
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.11"
+
 # Generic machine emulator and virtualizer
 brew "qemu"
+
 # SVG rendering tool and library
 brew "resvg"
+
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
+
 # Utility that provides fast incremental file transfer
 brew "rsync"
+
 # 7-Zip is a file archiver with a high compression ratio
 brew "sevenzip"
+
+# Command-line interface for https://speedtest.net bandwidth tests
+brew "speedtest-cli"
+
+# Command-line Kanban board/task manager with support for Trello
+brew "taskell"
+
 # Programmatically correct mistyped console commands
 brew "thefuck"
+
 # Official tldr client written in Rust
 brew "tlrc"
+
 # Terminal multiplexer
 brew "tmux"
+
 # Plugin manager for tmux
 brew "tpm"
+
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
+
 # Extremely fast Python package installer and resolver, written in Rust
 brew "uv"
+
 # Internet file retriever
 brew "wget"
+
+# Show the current WiFi network password
+brew "wifi-password"
+
 # Library to create, extract, and modify Windows Imaging files
 brew "wimlib"
+
 # Blazing fast terminal file manager written in Rust, based on async I/O
 brew "yazi"
+
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
+
 # Next-generation plugin manager for zsh
 brew "zplug"
+
 # Fish-like fast/unobtrusive autosuggestions for zsh
 brew "zsh-autosuggestions"
+
 # Additional completion definitions for zsh
 brew "zsh-completions"
+
 # Zsh port of Fish shell's history search
 brew "zsh-history-substring-search"
+
 # Fish shell like syntax highlighting for zsh
 brew "zsh-syntax-highlighting"
+
 # Software to interact with Atlassian Cloud from the terminal
 brew "atlassian/acli/acli"
+
 # Command-line interface for 1Password
 cask "1password-cli"
+
 # AeroSpace is an i3-like tiling window manager for macOS
 cask "aerospace"
+
 # Enable Windows-like alt-tab
 cask "alt-tab"
+
 # Reimagine your terminal
 cask "fig"
+
 # Web browser
 cask "firefox@developer-edition"
 cask "font-symbols-only-nerd-font"
+
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
+
 # Utility to extend trackpad functionality
 cask "middleclick"
+
 # Control your tools with a few keystrokes
 cask "raycast"
+
 # Move and resize windows using keyboard shortcuts or snap areas
 cask "rectangle"
+
 # System monitor for the menu bar
 cask "stats"
+
 # Customizable timing of breaks
 cask "time-out"
+
 # Virtual machines UI using QEMU
 cask "utm"
+
 # Rust-based terminal
 cask "warp"
+
 mas "1Password for Safari", id: 1569813296
 mas "Air Printer", id: 929399895
 mas "Bitwarden", id: 1352778147
@@ -144,7 +229,6 @@ mas "Pages", id: 409201541
 mas "Slack", id: 803453959
 mas "Tailscale", id: 1475387142
 mas "WhatsApp", id: 310633997
-mas "Windows App", id: 1295203466
 mas "Xcode", id: 497799835
 vscode "augment.vscode-augment"
 vscode "eamodio.gitlens"
